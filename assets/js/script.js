@@ -1,3 +1,16 @@
+var saveBtnEl = $(".saveBtn");
+var currentDate = $("#currentDay");
+var test = $("#hour-10");
+
+var myDay = [
+    {
+      id: "0",
+      hour: "10",
+      time: "10",
+      meridiem: "am",
+      reminder: ""
+    }
+]
 // Wrap all code that interacts with the DOM in a call to jQuery to ensure that
 // the code isn't run until the browser has finished rendering all the elements
 // in the html.
@@ -8,7 +21,11 @@ $(function () {
   // function? How can DOM traversal be used to get the "hour-x" id of the
   // time-block containing the button that was clicked? How might the id be
   // useful when saving the description in local storage?
-  //
+  saveBtnEl.on("click", function() {
+    console.log("I saved it!")
+    localStorage.setItem('myDay', JSON.stringify(myDay));
+    console.log(localStorage.getItem('test'));
+  })
   // TODO: Add code to apply the past, present, or future class to each time
   // block by comparing the id to the current hour. HINTS: How can the id
   // attribute of each time-block be used to conditionally add or remove the
@@ -20,6 +37,12 @@ $(function () {
   // attribute of each time-block be used to do this?
   //
   // TODO: Add code to display the current date in the header of the page.
-var currentDay = dayjs().format("MMM D, YYYY");
-$("#currentDay").text(currentDay);
+// var currentDay = dayjs().format("MMM D, YYYY h:mm:ss");
+// currentDate.text(currentDay);
+function displayTime() {
+  var rightNow = dayjs().format('MMM DD, YYYY [at] hh:mm:ss a');
+  currentDate.text(rightNow);
+}
+displayTime()
+setInterval(displayTime, 1000);
 });
