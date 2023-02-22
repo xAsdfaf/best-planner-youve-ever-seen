@@ -5,31 +5,31 @@ var currentDate = $("#currentDay");
 // calling the color changing function. 
 colorChanger();
 // adding save button functionality
-  saveBtnEl.on("click", saveUserInput);
+saveBtnEl.on("click", saveUserInput);
 // function to run on each timeblock individually 
-$(".time-block").each(function() {
+$(".time-block").each(function () {
 
-// selecting each block
+  // selecting each block
   var eachBlock = $(this).attr("id");
 
-// pulling text from local storage to avoid text loss on refresh
-$("#" + eachBlock + " textarea").text(localStorage.getItem(eachBlock));
+  // pulling text from local storage to avoid text loss on refresh
+  $("#" + eachBlock + " textarea").text(localStorage.getItem(eachBlock));
 });
 // changes color based on time
 function colorChanger() {
-  $(".time-block").each(function(){
-  var timeNow = parseInt(dayjs().format("HH"))
-  var timeOther = parseInt($(this).attr("id"));
-  $(this).removeClass("past present future");
+  $(".time-block").each(function () {
+    var timeNow = parseInt(dayjs().format("HH"))
+    var timeOther = parseInt($(this).attr("id"));
+    $(this).removeClass("past present future");
 
-  if (timeNow > timeOther) {
-    $(this).addClass("past");
-  } else if (timeNow < timeOther) {
-    $(this).addClass("future");
-  } else {
-    $(this).addClass("present");
-  }
-})
+    if (timeNow > timeOther) {
+      $(this).addClass("past");
+    } else if (timeNow < timeOther) {
+      $(this).addClass("future");
+    } else {
+      $(this).addClass("present");
+    }
+  })
 };
 // saving user input into local storage
 function saveUserInput() {
